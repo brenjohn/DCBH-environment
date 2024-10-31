@@ -59,7 +59,6 @@ class Cosmology():
         
         # Create the custom FlatLambdaCDM cosmology
         self.cosmo_model = FlatLambdaCDM(H0=H0, Om0=Om0, Ob0=Ob0, Tcmb0=Tcmb0)
-        self.cosmo_model.sigma8 = sigma_8  # Add sigma8 as an attribute
         
         self.z       = z                      # Redshift
         self.sigma_8 = sigma_8
