@@ -19,6 +19,7 @@ from dcbh_environment.central_halo_environment import CentralHaloEnvironment
 from dcbh_environment.lyman_werner_radiation import LymanWernerRadiation14
 from dcbh_environment.dark_matter_halos import HaloModel
 
+import multiprocessing as mp
 from multiprocessing import Pool
 
 
@@ -118,7 +119,7 @@ if __name__ == "__main__":
 
     epsilon_dc = 0.2  # Duty cycle
 
-    N_mc = 10000  # Number of Monte Carlo realisations
+    N_mc = 1000  # Number of Monte Carlo realisations
     N_m  = 400  # Number of mass bins
     N_r  = 100  # Number of radius bins
     
@@ -146,6 +147,6 @@ if __name__ == "__main__":
     os.makedirs(f'./z_{cosmology.z}/', exist_ok=True)
     
     # Create a pool of worker processes and start them working on MC sims.
-    with Pool(num_procs) as pool:
+    with mp.get_context('spawn').Pool(num_procs) as pool:
         pool.starmap(monte_carlo_simulation, work)
     # monte_carlo_simulation(*work[0]) # for debugging
